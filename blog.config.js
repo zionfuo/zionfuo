@@ -1,9 +1,9 @@
 const BLOG = {
-  author: 'Witt',
-  title: 'Witt - unix.bio',
+  author: 'zionfuo',
+  title: 'zionfuo',
   description:
-    "Hi, I'm Witt. A JavaScript full stack engineer, I'm creating apps and libs to help improve the developer experience.",
-  summary: 'JavaScript 工程师，对开发者体验感兴趣。',
+    "一只混迹开源社区、区块链、人工智能的运营狗。",
+  summary: '一只混迹开源社区、区块链、人工智能的运营狗。',
   language: 'zh-cn',
   latestLimit: 5,
 
