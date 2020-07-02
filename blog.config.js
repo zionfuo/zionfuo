@@ -13,12 +13,12 @@ const BLOG = {
     list: '所有',
   },
 
-  email: 'unix.bio@gmail.com',
-  github: 'unix',
-  twitter: 'echo_witt',
-  domain: 'unix.bio',
+  email: 'zionfuo@gmail.com',
+  github: 'zionfuo',
+  twitter: 'zionfuo',
+  domain: 'zionfuo.com',
 
-  googleAnalytics: 'UA-110371817-3',
+  googleAnalytics: '',
   cn: true,
   enableViews: true,
 
