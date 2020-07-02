@@ -2,8 +2,8 @@ const BLOG = {
   author: 'zionfuo',
   title: 'zionfuo',
   description:
-    "一只混迹开源社区、区块链、人工智能的运营狗。",
-  summary: '一只混迹开源社区、区块链、人工智能的运营狗。',
+    "一只混迹开源社区、区块链、人工智能行业的运营狗。",
+  summary: '一只混迹开源社区、区块链、人工智能行业的运营狗。',
   language: 'zh-cn',
   latestLimit: 5,
 
