@@ -1,0 +1,57 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Photoshop批量替换文字并导出图片',
+  date: '2018-12-07T08:12:39+08:00',
+  description: '',
+}
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/BNSU4OZVysTPkqD.png)
+
+在处理一些图片内容相同，文字内容不一样的时候。Photoshop有批量处理的方法，可以免去人工粘贴复制的麻烦。
+
+1、设计好需要替换文字的PSD
+
+![](https://ae01.alicdn.com/kf/HTB1kcRFaizxK1RkSnaV760n9VXa1.png)
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/HTB1kcRFaizxK1RkSnaV760n9VXa1.png)
+
+2、Photoshop程序：图像->变量->定义
+
+![](https://ae01.alicdn.com/kf/HTB1MjBEac_vK1Rjy0Fo760IxVXaB.png)
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/HTB1MjBEac_vK1Rjy0Fo760IxVXaB.png)
+
+3、将需要替换的文字在excel中整理出来
+
+![](https://ae01.alicdn.com/kf/HTB10HVDaffsK1RjSszb763qBXXaU.png)
+
+
+注意上图之中的变量
+
+Excel中的第一行必须是Photoshop中设置的文本替换的变量名称，这里是我用的是“名字”，具体可查看第二步第2小步
+
+4、Excel另存为txt，并将导出的txt文件改为ANSI编码
+
+![](https://ae01.alicdn.com/kf/HTB1uKpDacfrK1RkSmLy760GApXat.png)
+
+5、Photoshop程序：图像->变量->数据组
+
+![](https://ae01.alicdn.com/kf/HTB1U7RFanHuK1RkSndV760VwpXaG.png)
+
+6、Photoshop程序：文件->导出->数据组作为文件。至此将替换文字的PSD全部导出到电脑，下面开始采用Photoshop批处理转成JPEG文件
+
+![](https://ae01.alicdn.com/kf/HTB1KRREaiDxK1RjSsph762HrpXan.png)
+
+7、Photoshop程序：文件->脚本->图像处理器
+
+![](https://ae01.alicdn.com/kf/HTB1cAFBaXzsK1Rjy1Xb760OaFXae.png)
+
+至此，工作完成
+
+> 注意：我在做的时候发现三个字的名字与两个字的名字会有错位，所以最好分一下，批量一样长短的名字。
+
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
