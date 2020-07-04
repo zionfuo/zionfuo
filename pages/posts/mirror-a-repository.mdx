@@ -1,0 +1,29 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: '利用GitLab自动同步软件仓库',
+  date: '2019-06-13T08:12:39+08:00',
+  description: '',
+}
+
+利用GitLab自动同步GitHub、Gitee、Bitbucket软件仓库
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/He628601dd877480e88a1ee3aa11a383da.jpg)
+
+我在码云的账号：userName
+
+密码：password
+
+项目地址：https://gitee.com/Bytom/bytom.git
+
+那么这个地址应该相应的改成这样：
+
+https://userName:password@gitee.com/Bytom/bytom.git
+
+密码和地址之间有一个@符号。
+
+备注：此处的密码是Gitee、Bitbucket等平台的密码
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
