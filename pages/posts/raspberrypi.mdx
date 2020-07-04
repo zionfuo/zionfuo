@@ -1,0 +1,146 @@
+import Layout from 'lib/components/layout'
+import { Link, Note, Text, Spacer, Display, Code, Image, Snippet } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Raspberry Pi防丢教程',
+  date: '2016-05-05T16:00:41.619Z',
+  description: '',
+}
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/2016-05-05-raspberrypi.jpg)
+
+因为前几天移动硬盘傻掉了，只能格了，然后各种东西都木有了，还好学校让我们写实习报告，在实习报告里遗留了这份Raspberry Pi的安装过程。
+## 考前篇
+玩Raspberry Pi需要以下一些物品，好吧，还是因为穷，买不起显示器。忧伤。
+> 1、Raspberry Pi
+> 2、电源头（我为此买了一个群光5.35v2a和一个飞宏5.35v2a的两个电源头）
+> 3、JBL的数据线（我用这个）
+> 4、电脑一台
+> 5、闪迪C10 SD卡（听说闪迪和树莓派合一点）
+> 6、网线
+> 7、路由器
+
+
+## 安装篇
+
+### 烧Raspbian系统
+经过我的各种尝试发现只有Raspbian 系统可以无线安装，其他都需要显示器，屌丝伤不起。
+树莓派官方 Raspbian 系统下载：http://www.raspberrypi.org/downloads 
+系统写入工具Win32 Disk Imager
+官方下载地址：http://sourceforge.net/projects/win32diskimager/
+下载完成并安装成功后运行程序，将TF卡连接到电脑上，选择TF所在的盘符，这里是I盘，选择第二步解压的系统文件，点击 Write 按钮。进行系统安装。
+### 合理设置raspi-config程序
+raspi-config是Raspberry PI官方Raspbian镜像自带的一个系统配置工具。它都可以做什么呢？让我们来学习一下吧。raspi-config，会在系统首次启动时自动运行，就是那个蓝色背景，灰底黑字的界面。首次自动运行之后，下次就不会自动 运行了，若想手动运行，请以root身份运行：
+``` python
+sudo raspi-config
+``` 
+1 Expand Filesystem
+扩展文件系统（默认镜像写入SD卡后，根分区不会使用剩余的SD卡空间，造成空间浪费，运行此选项后会把根分区扩展到整个SD卡，最大效率使用SD卡）按回车即可。
+2 Change User Password 
+改变默认pi用户的密码，按回车后输入pi用户的新密码。
+3 Enable Boot to Desktop/Scratch
+启动时进入的环境选择
+Console Text console, requiring login(default)
+启动时进入字符控制台，需要进行登录（默认项）
+Desktop log in as user 'pi' at the graphical desktop
+启动时进入LXDE图形界面的桌面
+Scratch Start the Scratch programming environment upon boot
+启动时进入Scratch编程环境，进入后，可以点File->Exit退出，然后在退出过程中按Ctrl+C进入控制台。
+4 Internationalisation Options
+国际化选项，可以更改默认语言
+I1 Change Locale
+语言和区域设置，建议不要改，默认英文就好，因为你要是改为中文，以后使用putty等工具连接PI时，还会遇到一些乱码问题，如果想使用  中文，建议只安装中文字体，这样在图形界面下浏览WEB页面时就能显示中文了。确实想改中文，进入这个选项后按Page Down键把滚动移动到屏幕底部，用空格键选中zh-CN GB2312,zh-CN GB18030,zh-CN UTF-8,然后按回车，然后默认语言选中zh-cn然后回车，记住啊，最好选安装了中文字体再进行这步，安装中文字体的方法：
+``` python
+sudo apt-get update
+sudo apt-get install ttf-wqy-zenhei ttf-wqy-microhei
+```
+ I2 Change Timezone
+设置时区，如果设置不进行设置，PI的时间就显示不正常。选择Asia（亚洲）再选择Chongqing（重庆）即可。
+I3 Change Keyboard Layout
+改变键盘布局，还是不要管它了，按键不对的时候再选吧，一般没事。
+
+
+### 格式化硬盘
+先执行sudo -s然后就可以运行raspi-config格式化硬盘
+$ df -h //查看分区
+扩展分区 再查看root的大小 为13G正常。
+### 设置wifi链接
+用到软件PortScan(用于查ip用法百度的)
+1.进入终端后，输入以下命令：
+sudo nano /etc/network/interfaces
+2.无线固定IP设置
+``` python
+# /etc/network/interfaces
+auto lo eth0
+iface lo inet loopback
+
+#iface eth0 inet dhcp
+#iface wlan0 inet manual
+allow-hotplug wlan0
+auto wlan0
+#iface wlan0 inet manual
+#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface wlan0 inet static
+address 192.168.1.29
+netmask 255.255.255.255
+gateway 100.68.163.167
+wpa-ssid ROOT
+wpa-psk wang,2015
+wireless-power off
+iface default inet dhcp
+```
+3.最后按Ctrl+X退出。退出的是否询问是否保存，选择“Y”保存退出！
+4.系统需要重启才会生效。命令行输入：
+``` python
+sudo reboot
+```
+备注：
+1.终端如何知道IP地址？终端内输入：ifconfig 。【主要查看Wlan0对应的IP】
+2.重启后如果发现连接不上路由器，无法得到IP。注意上面的配置文件不支持路由
+器密码以WPA2的加密方式。可以进入路由器管理页面把WPA2选成WPA。
+3.终端下扫描ssid的命令，终端输入：sudo iwlist wlan0 scan 【能扫描到
+ssid，说明无线网卡硬件正常，并已免驱】
+### 解锁root
+树莓派使用的linux是debian系统，所以树莓派启用root和debian是相同的。
+debian里root账户默认没有密码，但账户锁定。
+当需要root权限时，由默认账户经由sudo执行，Raspberry pi 系统中的Raspbian
+默认用户是pi 密码为raspberry
+启用root
+raspbian默认用户名为pi、密码为raspberry（若使用raspi-config修改过密码，
+则为修改后的密码）
+默认情况下，root用户并未启用，且没有密码
+当需要root权限时，需要使用sudo执行
+若要启动root账号，可以使用pi账户进行登陆，执行命令
+``` python
+sudo passwd root
+```
+之后设定root密码，之后执行命令启用root账户
+``` python
+sudo passwd --unlock root
+```
+重启系统或执行以下命令切换到root用户
+``` python
+su root
+```
+重新锁定root账户可执行以下命令
+``` python
+sudo passwd --lock root
+```
+### 安装环境
+我用的是oneinstack包
+``` python
+yum -y install wget screen
+wget http://mirrors.linuxeye.com/oneinstack-full.tar.gz
+tar xzf oneinstack-full.tar.gz
+cd oneinstack
+screen -S oneinstack
+./install.sh
+```
+### 常用代码
+
+改权限
+``` python
+chmod -R  777  /home/pi/oneinstack
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
