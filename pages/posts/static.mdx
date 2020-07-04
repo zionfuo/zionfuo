@@ -1,0 +1,57 @@
+import Layout from 'lib/components/layout'
+import { Spacer, Display, Code, Link, Dot, Image, Snippet } from '@zeit-ui/react'
+
+export const meta = {
+  title: '前端静态资源CDN公共库整理',
+  date: '2019-03-25T11:31:33.243Z',
+  description: '',
+}
+
+## 什么是cdn
+CDN的全称是Content Delivery Network，即内容分发网络。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。通过在网络各处放置节点服务器所构成的在现有的互联网基础之上的一层智能虚拟网络，CDN系统能够实时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决 Internet网络拥挤的状况，提高用户访问网站的响应速度。
+
+## Staticfile CDN（七牛）
+
+https://www.staticfile.org/
+
+## Baomitu CDN（360）
+
+https://cdn.baomitu.com/
+
+## Bytedance CDN（今日头条）
+
+https://cdn.bytedance.com/
+
+## BootCDN
+
+https://www.bootcdn.cn/
+
+## jsDelivr
+
+https://www.jsdelivr.com/
+
+## cdnjs
+
+https://cdnjs.com/
+
+## BeeCDN
+
+https://www.beecdn.com/
+
+## BootstrapCDN
+
+https://www.bootstrapcdn.com/
+
+## Google Hosted Libraries（Google）
+
+https://developers.google.com/speed/libraries/
+
+## Microsoft ASP.net CDN（Microsoft）
+
+https://docs.microsoft.com/en-us/aspnet/ajax/cdn/overview
+
+## css.net
+
+https://css.loli.net/
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
