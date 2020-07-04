@@ -1,0 +1,91 @@
+import { Spacer } from '@zeit-ui/react'
+import NextLink from 'next/link'
+import Layout from 'lib/components/layout'
+
+export const meta = {
+  title: 'Sci-Hub最新网址',
+  date: '2018-03-09T13:47:31+08:00',
+  description: '',
+}
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/2018-03-09-sci-hub.jpg)
+
+Sci-Hub是一个线上数据库，其上提供62,000,000篇科学学术论文和文章。网站透过“.edu”代理服务器访问相关页面，每天会上传新的论文文章。2011年，哈萨克研究生亚历珊卓·艾尔巴金因为研究论文成本过高，每篇论文在付费墙机制下通常需要花费30美元，而决定成立Sci-Hub。2014年，学术界开始预测网站将会发展为类似Napster的服务。不过到了2015年，学术出版社爱思唯尔向纽约地方法院提交诉讼，指控Sci-Hub已经侵犯版权。
+
+## 作者
+
+亚历珊卓·艾尔巴金（俄语：Алекса́ндра Аса́новна Элбакя́н，1988年11月6日－）是一位哈萨克斯坦籍研究生、计算机程序员以及Sci-Hub的创建者。自然期刊将她列为2016年度十大科学人物之一。其事迹被用来与亚伦·斯沃茨相比较。
+艾尔巴金于1988年11月6日生于苏联时代的哈萨克斯坦阿拉木图，有亚美尼亚、斯拉夫和亚洲血统。艾尔巴金在阿斯塔纳完成了大学学业，2009年获得哈萨克国立科技大学的计算机科学理学士学位，专业为信息安全。并在此之间成为一名黑客。其后她在莫斯科找到了一份计算机安全方向的工作。之后于2010年到弗莱堡参与一项关于脑机接口的项目，对超人类主义思想产生兴趣。于当年参加佐治亚理工学院的夏季交流项目，她的研究主题为“神经科学与意识”。
+她于2011年返回哈萨克斯坦后创建了Sci-Hub，科学期刊称该网站为“可敬的利他主义抑或大型犯罪组织，取决于你是哪方”。Sci-Hub对本应付费的学术论文提供提供大量自动且免费的下载。她被出版商爱思唯尔在美国法院起诉，被判赔偿1500万美元罚金。艾尔巴金为了逃避引渡的风险，因此四处躲藏。
+
+可用网址
+http://sci-hub.tw
+http://sci-hub.tv
+http://sci-hub.ws
+http://sci-hub.mn
+http://sci-hub.hk
+http://sci-hub.la
+http://sci-hub.name
+http://tree.sci-hub.la/
+https://scihub22266oqcxt.onion.link
+http://sci-hub.hk/
+http://sci-hub.tw/
+http://sci-hub.la/
+http://sci-hub.mn/
+http://sci-hub.name
+http://sci-hub.is/
+http://sci-hub.tv/
+http://sci-hub.ws/
+http://www.sci-hub.cn/
+http://sci-hub.sci-hub.hk
+http://sci-hub.sci-hub.tw
+http://sci-hub.sci-hub.mn
+http://sci-hub.sci-hub.tv
+https://sci-hub.org.cn/
+https://scihub22266oqcxt.onion.link/
+http://www.sci-hub.cc/
+http://www.sci-hub.io/
+http://www.sci-hub.bz/
+http://www.sci-hub.net/
+http://www.sci-hub.org/
+http://www.sci-hub.xyz/
+http://www.sci-hub.jp/
+http://www.sci-hub.kr/
+http://www.sci-hub.au/
+http://www.sci-hub.ru/
+http://www.sci-hub.de/
+
+## 可用IP
+
+80.82.77.83
+80.82.77.84
+但是有网友反应使用 IP 地址虽然可以访问，但是不能下载文献。
+不过除此之外，还有一个方法可以解决。
+修改HOSTS
+
+```
+#sci-hub by howsci.com
+80.82.77.83 sci-hub.cc
+80.82.77.84 sci-hub.cc
+80.82.77.83 www.sci-hub.cc
+80.82.77.84 www.sci-hub.cc
+80.82.77.83 sci-hub.io
+80.82.77.84 sci-hub.io
+80.82.77.83 www.sci-hub.io
+80.82.77.84 www.sci-hub.io
+80.82.77.83 sci-hub.bz
+80.82.77.84 sci-hub.bz
+80.82.77.83 www.sci-hub.bz
+80.82.77.84 www.sci-hub.bz
+```
+
+可以使用Hozz工具[使用Hozz自动更新hosts]
+然后访问
+https://sci-hub.bz/
+https://sci-hub.cc/
+https://sci-hub.io/
+
+自动检测工具
+Sci-Hub 可用网址检测工具：[http://tool.yovisun.com/journal/scihub_links.php](http://tool.yovisun.com/journal/scihub_links.php)
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
