@@ -1,0 +1,22 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Cloudflare SSL设置',
+  date: '2018-10-29T08:12:39+08:00',
+  description: '',
+}
+
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/2018-10-29-cloudflare-ssl.png)
+
+在Cloudflare的“加密”中可以一键开启SSL，这个SSL总共四种模式：OFF、Flexible SSL、Full SSL、Full SSL (strict)。这几种模式之间具体有什么区别呢。
+
+Flexible SSL：您的网站访问者和Cloudflare之间有加密连接，但是从Cloudflare到您的服务器没有加密。即半程加密。优点在于：你的网站不需要SSL证书，用户也能实现SSL加密访问。
+
+Full SSL：全程加密，即从你的网站到CDN服务器再到用户，全程都是SSL加密的。优点在于：只要你的服务器有SSL证书（不管是自签名证书还是购买的SSL），就可以实现SSL加密访问。
+
+Full SSL (strict)：全程加密，它与Full SSL的区别在于你的服务器必须是安装了那些已经受信任的SSL证书（即购买的SSL证书），否则无法开启SSL加密访问。
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
