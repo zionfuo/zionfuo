@@ -1,0 +1,192 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'MakerDAO 代币解释:DAI, WETH, PETH, SIN, MKR（一）',
+  date: '2019-05-16T08:12:39+08:00',
+  description: '',
+}
+
+### Maker DAO Token
+
+Maker DAO 系统是由多个智能合约 ( Sai Tap, Sai Tub, Vox, Medianiser, etc.), 和 ERC-20 代币组成. 他们一起努力确保DAI Token的稳定。
+
+在这篇文章中，我们主要关注 token 是如何周转和使用的。下图显示了 token 流动周转和智能合同使用方式，如何将一个 token 转换为另一个 token:
+
+![Maker DAO Token流动周转和智能合同使用方式](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714083708.png)
+
+Maker DAO Token流动周转和智能合同使用方式
+
+Token 显示为圆形，而智能合约及其实体显示为圆矩形。图表上的箭头表示，使用这些智能合约的方法，您可以将余额从一个 token 转换为另一个 token 。
+
+例如，调用 join() 将从您那里删除 WETH token，并为您提供适当数量的 PETH token。
+
+### 不稳定(“Ether”-like)的Token
+
+图的左侧显示了与 Ether 相关的令牌:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714083839.png)
+
+[_**ETH**_](https://bloxy.info/tokens/ETH)：Maker DAO 系统中没有直接使用它本身。如果你原来有ETH (和我们大多数人一样)，你必须首先将它转换成 WETH ( Wrapped ETH “包装过的ETH” ) token。
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714083903.png)
+
+[_**WETH**_](https://bloxy.info/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)：是ETH的一对一映射，但是作为 ERC-20 的 token 存在。在任何时候，你都可以把 ETH 换成 WETH 和 back。缺点是，每一次这样的转变都需要 gas。
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714083923.png)
+
+[_**PETH**_](https://bloxy.info/address/0xf53ad2c6851052a81b42133467480961b2321c09)：是 “Pooled Ether（集合以太）”的缩写。当你把 WETH 存入 Maker DAO 时，你会得到这个token。请注意，它并不完全是一对一的，它的汇率是计算出来的。
+
+### 稳定(“DAI”-like)的Token
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084051.png)
+
+[_**DAI**_](https://bloxy.info/address/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359)：MakerDAO的稳定币，预计将接近 1 美元。当你用 CDP 生成贷款时，它会为你创造 DAI。
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084106.png)
+
+[_**SIN**_](https://bloxy.info/address/0x79f6d0f646706e1261acf0b93dcb864f357d4680)：代表已清算的债务。它的价值等于 1DAI，在债务清算过程中使用而不是 DAI。
+
+### Maker DAO效用(Utility)的Token
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084135.png)
+
+[_**MKR**_](https://bloxy.info/address/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2)：用于偿还债务时支付佣金的token (通过擦拭方法 by wipe method)。
+
+### 智能合约 Smart Contracts
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084200.png)
+
+[_**Sai Tub**_](https://bloxy.info/address/0x448a5065aebb8e423f0896e6c5d525c040f59af3)智能合约：抵押债仓(CDP)系统。CDP 是你在 PETH 抵押后生成的DAI的债务。Maker DAO的大多数操作都是使用它完成的。
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084218.png)
+
+[_**Sai Tap**_](https://bloxy.info/address/0xbda109309f9fafa6dd6a9cb9f1df4085b27ee8ef)智能合约：可以用于清算债务并从中产生利润。
+
+### 智能合约使用方法
+
+Maker DAO 智能合约有很多的使用方法，下表对其中的主要部分进行了分类：
+
+![Maker DAO智能合约使用方法](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084251.png)
+
+Maker DAO智能合约使用方法
+
+大多数方法都是使用我们上面列出的 token 来操作，并且 CDP 是 Sai Tub 内部的实体。这些方法的更详细描述可以在[Maker DAO交易图解](https://medium.com/coinmonks/maker-dao-transactions-illustrated-691ad2715cf7)这篇文章之中。
+
+### Token 使用模式
+
+下面的材料是基于 [Bloxy.info](https://bloxy.info/) Token的周转工具和 Maker DAO 分析的[仪表板](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true)。
+
+```
+Bloxy.info web site provides a set of tools for analytics, traders, companies and crypto enthusiasts.
+
+The tools include APIs, dashboards and search engine, all available on-site, providing accurate data, indexed directly from the blockchain live node.
+
+Bloxy mission is to make blockchain more transparent and accessible to people and businesses.
+
+Please, make a reference to the source of data when referencing this article.
+```
+
+我们的目标是将智能合同代码和上面的图表与关于这些token的实际Token周转和用户操作相匹配。我们将使用我们的工具和分析方法，从不同的角度逐一调查token。
+
+我们的第一个token是…
+
+### WETH ( Wrapped Ether)
+
+WETH 解释在 [weth.io](https://weth.io/) 网站上。WETH被称为“包装过的ETH（wrapped Ether）”，可以在需要 ERC-20 token的地方代替ETH。我们首先想到的是分散交换 (DEX)。通常，DEX 协议更希望使用 ERC20 token 作为买/卖方之间的资产，并且不能直接使用ETH。所以你先把你的 ETH 包装成 WETH ,卸装以后的 WETH 可以换回 ETH。
+
+这个 token 与 Maker DAO 协议于 2017年12月同时发起。请注意，最大的持有者是Maker DAO的智能合约:
+
+![WETH最大持有者](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084331.png)
+
+WETH最大持有者
+
+所有者与 其他 token 的交集还显示了 Maker DAO token:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084359.png)
+
+共同持有者相关的令牌，来源: [bloxy.info](https://bloxy.info/token_holders/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)
+
+MaerDAO SaiTub 智能合约上出现这种高 WETH 余额的出现，是因为用户将 WETH 存入 Maker DAO 的 SaiTub 智能合约，以便之后创建 CDP。我们分析了这个过程中动态的 [MakerDAO 仪表板](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true):
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/1_UmvN63KmzwZhlxu1zrFQUA.png)
+
+WETH锁定了金额、存款和取款。来源: bloxy.info [MakerDAO dashboard](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true)
+
+从这张图表中可以看出，在2019年5月10日，锁定的 WETH 金额约为 200 万 ETH (橙色线)，而创造的总金额超过了400万 ETH 以上。
+
+参与这项活动的人有多少？交易者的数量可以通过唯一地址来估计，在 SaiTub 智能合约上启动退出/加入交易记录:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084712.png)
+
+在 Maker DAO 智能合约上唯一的地址数、锁定和释放WETH。来源:bloxy.info [MakerDAO dashboard](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true)
+
+交易者的行为是由每月锁定和释放的WETH数量来呈现的：
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084739.png)
+
+
+每月锁定和释放 WETH 的金额。来源: bloxy.info [MakerDAO dashboard](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true)
+
+图中右侧的两列展示了，在 2019年4月中旬前，当更多的人开始从Maker DAO锁定和释放WETH时，锁定和释放的数量的趋势相当对称。那反过来也可导致Maker DAO的WETH数量减少。
+
+### Maker DAO之外的WETH?
+
+那么问题来了，除了 Maker DAO 之外，它可以在任何地方使用吗？
+
+答案是肯定的。首先，它在 ZeroX 和 Oasis (匹配市场) 交易所交易中非常活跃，下图是 bloxyinfo 中展示 [WETH交易页面](https://stat.bloxy.info/token_trades/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)。
+
+[Token周转工具](https://stat.bloxy.info/token_graphs/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2#) 显示 WETH 的主要流量:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084813.png)
+
+主要的WETH周转路线。来源: [bloxy.info](https://stat.bloxy.info/token_graphs/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2#)
+
+正如你所看到的，WETH token 有几个 “重心（centers of gravity）”:
+
+1. MakerDAI的SaiTub合约
+2. Oasis, DDEX 等交易所
+3. ZeroX (不涉及传输，所以没有在这个图表上明确显示)
+
+我们拿 DEX（去中心化交易所） 上一个最活跃的交易者的 WETH 交易作为例子:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084847.png)
+
+DEX 中 WETH/DAI 交易对 进行多方交易。来源: [bloxy.info](https://bloxy.info/tx/0xc538725a76c26695c3fae183bea430bfb86449bc9a066288e52716d22b10f009)
+
+WETH 的交易不仅仅是对DAI的交易，以下是 DEX 交易所的前 10 组交易对:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084914.png)
+
+DEX 上的 WETH 前10组交易对。来源: [bloxy.info DEX API](https://bloxy.info/api_methods)
+
+### PETH ( Pooled Ether)
+
+PETH 代表了 ETH，你在 Maker DAO 智能合约中投入了 ETH，以在未来创造 DAI 债务。它对 WETH 的费率等于
+
+PETH = WETH \* (Total PETH supply) / (WETH balance )
+
+现在等于 1.04，因为 PETH 的一部分由于债务清算而被烧毁。如图所示，这个数字随着时间的推移而增加:
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714084937.png)
+
+与 PETH/WETH 相关的费率和利润。来源：bloxy.info [MakerDAO dashboard](https://stat.bloxy.info/superset/dashboard/makerdao/?standalone=true)
+
+_**PETH/WETH 费率的变化为早期进入进入并用 PETH换取WETH的用户创造了循环利率（APR Annual Percentage Rate）和利润，他们的总利润估计在 80,000 ETH 左右。**_
+
+PETH 不能在 DEX 上进行交易的，似乎只作为MakerDAO的基础设施在其内部使用。
+
+下面的Token周转显示，主要的 PETH 周转量是Sai Tub智能合约之间的互相转移。然后，部分周转量会转到 SaiTap (在债务清算的情况下)，或者转到系统地址 (作为燃料):
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/20200714085004.png)
+
+PETH token周转。来源：[bloxy.info token flow tool](https://bloxy.info/token_graphs/0xf53ad2c6851052a81b42133467480961b2321c09#)
+
+继续! 在第二部分，我们将讨论 DAI 、 MKR 和 SIN 的 token !
+
+作者：Aleksey Studnev
+
+原文：[https://medium.com/coinmonks/makerdao-tokens-explained-dai-weth-peth-sin-mkr-part-1-a46a0f687d5e](https://medium.com/coinmonks/makerdao-tokens-explained-dai-weth-peth-sin-mkr-part-1-a46a0f687d5e)
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
