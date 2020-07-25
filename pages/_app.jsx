@@ -40,9 +40,9 @@ const Application = ({ Component, pageProps }) => {
         <meta name="twitter:creator" content={`@${BLOG.twitter}`} />
         <meta property="og:title" content={BLOG.title} />
         <meta property="og:url" content={BLOG.domain} />
-        <meta property="og:image" content={`https:${domain}/assets/og-main.png`} />
-        <meta property="twitter:image" content={`https:${domain}/assets/og-main.png`} />
-        <meta itemProp="image" property="og:image" content={`https:${domain}/assets/og-main.png`} />
+        <meta property="og:image" content={`https:${domain}/assets/og.png`} />
+        <meta property="twitter:image" content={`https:${domain}/assets/og.png`} />
+        <meta itemProp="image" property="og:image" content={`https:${domain}/assets/og.png`} />
         <meta
           name="viewport"
           content="initial-scale=1, maximum-scale=5, minimum-scale=1, viewport-fit=cover"
