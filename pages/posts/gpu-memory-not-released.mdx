@@ -1,0 +1,82 @@
+import Layout from 'lib/components/layout'
+import { Link, Note, Spacer, Text, Code, Display, Image, Tabs, Snippet } from '@zeit-ui/react'
+
+export const meta = {
+  title: '解决GPU显存未释放问题',
+  date: '2020-07-29T22:57:30.027Z',
+  description: '',
+}
+
+终止程序之后，显存依然被占用，这里我们提供了两种解决方案，帮助用户解决这个问题。
+
+## nvidia-smi查看
+
+我们可以先用如下命令 **nvidia-smi** 查看一下当前GPU进程情况。
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/gpu-memory-not-released-1.png)
+
+```
+GPU：GPU 编号；
+Name：GPU 型号；
+Persistence-M：持续模式的状态。持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间更少，这里显示的是off的状态；
+Fan：风扇转速，从0到100%之间变动；
+Temp：温度，单位是摄氏度；
+Perf：性能状态，从P0到P12，P0表示最大性能，P12表示状态最小性能（即 GPU 未工作时为P0，达到最大工作限度时为P12）。
+Pwr:Usage/Cap：能耗；
+Memory Usage：显存使用率；
+Bus-Id：涉及GPU总线的东西，domain:bus:device.function；
+Disp.A：Display Active，表示GPU的显示是否初始化；
+Volatile GPU-Util：浮动的GPU利用率；
+Uncorr. ECC：Error Correcting Code，错误检查与纠正；
+Compute M：compute mode，计算模式。
+Processes：表示每个进程对 GPU 的显存使用率
+```
+
+## 第一种方案
+
+尝试使用Jupyter内的 **shutdown and restart kernel** 选项，如果无效的情况下使用使用第二种方案；
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/gpu-memory-not-released-2.png)
+
+## 第二种方案
+
+
+在终端内操作以下命令。
+
+```bash
+apt-get update
+```
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2019/gpu-memory-not-released-3.png)
+
+1 安装psmisc
+
+```bash
+apt install psmisc
+```
+
+2 查看运行在gpu上的所有程序，
+
+```bash
+fuser -v /dev/nvidia*
+```
+
+
+3 查看具体这个进程调用GPU的情况，也可以通过top命令查看
+
+```bash
+pmap -d PID
+```
+
+4 强行关掉所有当前并未执行的僵尸进程
+
+```bash
+kill -9 PID
+```
+
+参考文献：
+
+1.[[解决]GPU显存未释放问题](https://www.jianshu.com/p/0d8ea6ca332a)
+2.[GPU状态监测 nvidia-smi 命令详解](https://blog.csdn.net/chanbo8205/article/details/85100387)
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
