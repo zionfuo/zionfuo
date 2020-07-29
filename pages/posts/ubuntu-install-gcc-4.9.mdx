@@ -1,0 +1,53 @@
+import Layout from 'lib/components/layout'
+import { Link, Note, Spacer, Text, Code, Display, Image, Tabs, Snippet } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Ubuntu 16.04 安装 gcc4.9 和 g++4.9',
+  date: '2020-07-29T22:57:30.027Z',
+  description: '',
+}
+
+修改软件源
+
+```bash
+cd /etc/apt/
+cp sources.list sources.list.bk # 备份源文件
+vim sources.list # 修改文件
+```
+
+添加如下两行
+
+```bash
+deb http://dk.archive.ubuntu.com/ubuntu/ xenial main
+deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe
+```
+
+输入 :wq 保存修改
+
+然后更新系统
+
+```bash
+apt-get update
+```
+
+ 安装
+
+```bash
+apt-get install gcc-4.9
+apt-get install g++-4.9
+```
+
+更新
+
+```bash
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 20
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
+```
+
+验证
+
+```bash
+gcc --version
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
