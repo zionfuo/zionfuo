@@ -1,0 +1,33 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Ubuntu 网盘文件上传下载',
+  date: '2020-10-08T08:12:39+08:00',
+  description: '',
+}
+
+## 使用 Transfer 上传到临时文件
+
+项目：https://github.com/Mikubill/transfer
+
+命令
+
+```
+curl -sL https://git.io/file-transfer | sh 
+./transfer cow xxxx.txt
+```
+
+## Ubuntu 下载 Google Drive
+
+项目：https://github.com/wkentaro/gdown
+
+命令
+
+```
+gdown https://drive.google.com/uc?id=0B_NiLAzvehC9R2stRmQyM3ZiVjQ
+```
+
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
