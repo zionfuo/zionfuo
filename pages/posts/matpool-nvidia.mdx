@@ -15,11 +15,21 @@ export const meta = {
 
 ![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220114.jpg)
 
+安装脚本在dist目录下
+
 ![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220600.jpg)
+
+选择cuda的版本号
 
 ![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220727.jpg)
 
+矩池云上cuda8/cuda9使用的是ubuntu16.04，cuda10及以上都是ubuntu18.04
+
 ![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220221117.jpg)
+
+- base：cuda安装方式
+- devel：nvcc等安装方式
+- runtime：cudnn等安装方式
 
 检查系统版本
 
@@ -41,16 +51,36 @@ curl -fsSL https://mirrors.aliyun.com/nvidia-cuda/ubuntu1804/x86_64/7fa2af80.pub
 echo "deb https://mirrors.aliyun.com/nvidia-cuda/ubuntu1804/x86_64/ /" > /etc/apt/sources.list.d/cuda.list
 ```
 
+> cuda、nvcc在阿里源的nvidia-cuda中有，软件的对应的版本可以在阿里源中搜索查到。
+https://mirrors.aliyun.com/nvidia-cuda/ubuntu1804（1604）/x86_64/
+
+
 安装所需版本的 cuda
 
+以cuda11为例，根据[Dockerfile](https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.0.3/ubuntu18.04-x86_64/base/Dockerfile)得出安装命令如下
 
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220223314.jpg)
+
+```
+# 以升级到cuda11为例
+apt-get update && apt-get install -y --no-install-recommends \
+    cuda-cudart-11-0=11.0.221-1 \
+    cuda-compat-11-0 &&\
+    ln -s cuda-11.0 /usr/local/cuda && \
+    rm -rf /var/lib/apt/lists/*
+```
 
 安装所需版本的 nvcc
 
+以cuda10版本的nvcc为例，根据[Dockerfile](https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/10.0/ubuntu18.04-x86_64/devel/Dockerfile)得出安装命令如下
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220223955.jpg)
+
 ```
-apt update
 # "10-0" 表示安装CUDA10.0版本的 nvcc, 应根据镜像中cuda版本安装
-apt install cuda-command-line-tools-10-0
+apt-get update && apt-get install -y --no-install-recommends \
+    apt install cuda-command-line-tools-10-0 \
+    rm -rf /var/lib/apt/lists/*
 ```
 
 ## cudnn 与 tensorRT 安装教程
@@ -65,7 +95,17 @@ curl -fsSL https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/
 echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64//" > /etc/apt/sources.list.d/cuda.list
 ```
 
+> cudnn、tensorRT在腾讯源的nvidia-machine-learning中有，软件的对应的版本可以在腾讯源中搜索查到。
+https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804（1604）/x86_64/
+
+
 安装所需版本的 cudnn
+
+以cuda10.2下cudnn 8.0.3版本为例，根据[Dockerfile](https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/10.2/ubuntu18.04-x86_64/runtime/cudnn8/Dockerfile
+
+)得出安装命令如下
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220224216.jpg)
 
 ```
 # 这里以cudnn 8.0.3.33版本为例
@@ -76,6 +116,12 @@ apt-get update && apt-get install -y --no-install-recommends \
 ```
 
 安装所需版本的 tensorRT
+
+根据TensorFlow的[官方文档](https://www.tensorflow.org/install/gpu#install_cuda_with_apt)得出安装命令如下
+
+> https://www.tensorflow.org/install/gpu
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220222331.jpg)
 
 ```
 # 这里以tensorRT 7.1.3版本为例
