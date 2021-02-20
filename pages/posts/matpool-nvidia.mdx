@@ -1,0 +1,87 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Spacer, Link } from '@zeit-ui/react'
+
+export const meta = {
+  title: '矩池云安装/修改 cuda、cudnn、nvcc、tensorRT 教程',
+  date: '2021-02-18T08:12:39+08:00',
+  description: '',
+}
+
+## 安装方案
+
+> https://gitlab.com/nvidia/container-images/cuda/ 
+> 国内同步镜像：https://gitee.com/zionfuo/cuda
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220114.jpg)
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220600.jpg)
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220220727.jpg)
+
+![](https://cdn.jsdelivr.net/gh/zionfuo/img/2021/20210220221117.jpg)
+
+检查系统版本
+
+```
+source /etc/os-release && echo $VERSION_ID
+```
+
+## cuda 与 nvcc 安装教程
+
+导入apt仓库和其GPG key
+
+```
+# 检查系统若输出 16.04，请用下面的命令
+curl -fsSL https://mirrors.aliyun.com/nvidia-cuda/ubuntu1604/x86_64/7fa2af80.pub | apt-key add -
+echo "deb https://mirrors.aliyun.com/nvidia-cuda/ubuntu1604/x86_64/ /" > /etc/apt/sources.list.d/cuda.list
+
+# 检查系统若输出 18.04，请用下面的命令
+curl -fsSL https://mirrors.aliyun.com/nvidia-cuda/ubuntu1804/x86_64/7fa2af80.pub | apt-key add -
+echo "deb https://mirrors.aliyun.com/nvidia-cuda/ubuntu1804/x86_64/ /" > /etc/apt/sources.list.d/cuda.list
+```
+
+安装所需版本的 cuda
+
+
+
+安装所需版本的 nvcc
+
+```
+apt update
+# "10-0" 表示安装CUDA10.0版本的 nvcc, 应根据镜像中cuda版本安装
+apt install cuda-command-line-tools-10-0
+```
+
+## cudnn 与 tensorRT 安装教程
+
+```
+# 检查系统若输出 16.04，请用下面的命令
+curl -fsSL https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1604/x86_64/7fa2af80.pub | apt-key add -
+echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1604/x86_64//" > /etc/apt/sources.list.d/cuda.list
+
+# 检查系统若输出 18.04，请用下面的命令
+curl -fsSL https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64/7fa2af80.pub | apt-key add -
+echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64//" > /etc/apt/sources.list.d/cuda.list
+```
+
+安装所需版本的 cudnn
+
+```
+# 这里以cudnn 8.0.3.33版本为例
+apt-get update && apt-get install -y --no-install-recommends \
+    libcudnn8=8.0.3.33-1+cuda10.2 \
+    && apt-mark hold libcudnn8 && \
+    rm -rf /var/lib/apt/lists/*
+```
+
+安装所需版本的 tensorRT
+
+```
+# 这里以tensorRT 7.1.3版本为例
+apt-get install -y --no-install-recommends libnvinfer7=7.1.3-1+cuda11.0 \
+    libnvinfer-dev=7.1.3-1+cuda11.0 \
+    libnvinfer-plugin7=7.1.3-1+cuda11.0
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
