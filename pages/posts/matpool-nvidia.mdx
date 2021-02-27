@@ -88,11 +88,11 @@ apt-get update && apt-get install -y --no-install-recommends \
 ```
 # 检查系统若输出 16.04，请用下面的命令
 curl -fsSL https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1604/x86_64/7fa2af80.pub | apt-key add -
-echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1604/x86_64//" > /etc/apt/sources.list.d/cuda.list
+echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1604/x86_64/ /" > /etc/apt/sources.list.d/cuda.list
 
 # 检查系统若输出 18.04，请用下面的命令
 curl -fsSL https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64/7fa2af80.pub | apt-key add -
-echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64//" > /etc/apt/sources.list.d/cuda.list
+echo "deb https://mirrors.cloud.tencent.com/nvidia-machine-learning/ubuntu1804/x86_64/ /" > /etc/apt/sources.list.d/cuda.list
 ```
 
 > cudnn、tensorRT在腾讯源的nvidia-machine-learning中有，软件的对应的版本可以在腾讯源中搜索查到。
