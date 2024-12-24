@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+![](https://github.com/user-attachments/assets/b3c72b9c-c415-4672-8c6b-29f24ecd16c5)
+
 <!--
 **zionfuo/zionfuo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
