@@ -1,6 +1,5 @@
 ## Hi there 👋
-
-![](https://github.com/user-attachments/assets/c7ab5bc5-d24e-4bb3-ac20-13c0e434816c)
+<img width="220" height="220" alt="image" src="https://github.com/user-attachments/assets/eafe233d-04f0-4169-8f9b-c1d99d83962e" />
 
 <!--
 **zionfuo/zionfuo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -15,4 +14,5 @@ Here are some ideas to get you started:
 - 📫 How to reach me: ...
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
+![](https://github.com/user-attachments/assets/c7ab5bc5-d24e-4bb3-ac20-13c0e434816c)
 -->
